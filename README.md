@@ -4,8 +4,16 @@ Ranks GitHub repositories by **star velocity** (stars gained over a time window)
 
 ## Architecture
 
-- `backend/` — Node.js + Fastify + SQLite. Crawls GitHub Search for recent repos, stores timestamped star snapshots, and serves `/api/trending`.
-- `frontend/` — Vite + React + Tailwind CSS leaderboard UI.
+- `backend/` — Node.js + Fastify + SQLite. Crawls GitHub Search for recent repos, stores timestamped star snapshots, classifies repos into categories, and serves `/api/trending`.
+- `frontend/` — Vite + React + Tailwind CSS leaderboard UI (renaissance themed).
+
+## Features
+
+- Duration filters: **24H**, **7D**, **1M**.
+- Categories: **AI**, **Security**, **Trading**, **DevTools**, **Education**, **Others** (keyword-based).
+- Pagination over the top 100 repos per filter.
+- **Fetch Repos** button to trigger the crawler from the browser.
+- Momentum delta = stars gained in the selected window.
 
 ## Setup
 
@@ -14,13 +22,13 @@ Ranks GitHub repositories by **star velocity** (stars gained over a time window)
 ```bash
 cd backend
 npm install
-cp .env.example .env   # optionally set GITHUB_TOKEN for higher rate limits
+cp .env.example .env   # optional: set GITHUB_TOKEN for higher rate limits
 npm run initdb
-npm run worker         # crawl + snapshot
+npm run worker         # crawl + snapshot repos
 npm run server         # http://localhost:3001
 ```
 
-Run `npm run worker` periodically (cron) to accumulate snapshots for momentum deltas.
+Run `npm run worker` periodically (cron) or use the **Fetch Repos** button to accumulate snapshots so momentum deltas populate.
 
 ### Frontend
 
@@ -28,9 +36,14 @@ Run `npm run worker` periodically (cron) to accumulate snapshots for momentum de
 cd frontend
 npm install
 npm run dev            # http://localhost:5173 (proxies /api to backend)
+npm run build          # production build
 ```
 
 ## API
 
 - `GET /api/health`
-- `GET /api/trending?window=24&limit=50` — `window` in hours (24 or 168).
+- `GET /api/categories` — list of categories
+- `GET /api/trending?window=24h&category=All&limit=100&page=1&pageSize=20`
+- `POST /api/fetch` — run the worker (crawl + snapshot)
+EOF
+echo done
