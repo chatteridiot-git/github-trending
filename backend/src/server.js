@@ -6,7 +6,7 @@ const cors = require('@fastify/cors');
 const { initDb, query, get } = require('./db');
 
 const WINDOWS = { '24h': 24, '7d': 168, '30d': 720 };
-const VALID_CATEGORIES = ['AI', 'Security', 'Trading', 'Others'];
+const VALID_CATEGORIES = ['AI', 'Security', 'Trading', 'DevTools', 'Web', 'Data', 'Mobile', 'Gaming', 'Education', 'Others'];
 
 const app = Fastify({ logger: true });
 

@@ -6,7 +6,7 @@ const WINDOWS = [
   { label: '1m', key: '30d' },
 ];
 
-const CATEGORIES = ['All', 'AI', 'Security', 'Trading', 'Others'];
+const CATEGORIES = ['All', 'AI', 'Security', 'Trading', 'DevTools', 'Web', 'Data', 'Mobile', 'Gaming', 'Education', 'Others'];
 
 const OCEAN = {
   bg: 'bg-gradient-to-b from-slate-950 via-cyan-950/40 to-slate-950',
@@ -23,6 +23,12 @@ function categoryBadge(cat) {
     AI: 'bg-violet-500/20 text-violet-300 border-violet-500/40',
     Security: 'bg-rose-500/20 text-rose-300 border-rose-500/40',
     Trading: 'bg-amber-500/20 text-amber-300 border-amber-500/40',
+    DevTools: 'bg-sky-500/20 text-sky-300 border-sky-500/40',
+    Web: 'bg-cyan-500/20 text-cyan-300 border-cyan-500/40',
+    Data: 'bg-teal-500/20 text-teal-300 border-teal-500/40',
+    Mobile: 'bg-indigo-500/20 text-indigo-300 border-indigo-500/40',
+    Gaming: 'bg-pink-500/20 text-pink-300 border-pink-500/40',
+    Education: 'bg-lime-500/20 text-lime-300 border-lime-500/40',
     Others: 'bg-slate-500/20 text-slate-300 border-slate-500/40',
   };
   return map[cat] || map.Others;
