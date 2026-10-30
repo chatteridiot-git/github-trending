@@ -1,4 +1,4 @@
-const CATEGORIES = ['AI', 'Security', 'Trading', 'DevTools', 'Web', 'Data', 'Mobile', 'Gaming', 'Education', 'Others'];
+const CATEGORIES = ['AI', 'Security', 'Trading', 'DevTools', 'Education', 'Others'];
 
 const KEYWORDS = {
   AI: [
@@ -23,24 +23,6 @@ const KEYWORDS = {
     'compiler', 'debugger', 'ide', 'plugin', 'extension', 'vscode', 'neovim', 'terminal',
     'git', 'docker', 'kubernetes', 'ci/cd', 'testing', 'test framework', 'package manager',
     'monorepo', 'scaffold', 'boilerplate', 'template', 'lint', 'prettier', 'eslint',
-  ],
-  Web: [
-    'react', 'vue', 'angular', 'svelte', 'next.js', 'nextjs', 'nuxt', 'astro',
-    'frontend', 'web app', 'website', 'css', 'tailwind', 'html', 'dom', 'browser',
-    'fullstack', 'full-stack', 'web framework', 'http server', 'api framework',
-  ],
-  Data: [
-    'database', 'sql', 'nosql', 'postgres', 'mysql', 'mongodb', 'redis', 'analytics',
-    'data pipeline', 'etl', 'warehouse', 'big data', 'visualization', 'chart',
-    'dashboard', 'bi ', 'spark', 'kafka', 'airflow', 'dbt', 'olap',
-  ],
-  Mobile: [
-    'ios', 'android', 'flutter', 'react native', 'swift', 'kotlin', 'mobile app',
-    'xcode', 'apk', 'iphone', 'tablet',
-  ],
-  Gaming: [
-    'game', 'gaming', 'unity', 'unreal', 'godot', 'pygame', 'engine', 'rpg',
-    'fps', 'multiplayer', 'steam', 'playstation', 'xbox',
   ],
   Education: [
     'education', 'tutorial', 'course', 'learn', 'teach', 'school', 'university',

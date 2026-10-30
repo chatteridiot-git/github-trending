@@ -4,9 +4,10 @@ const path = require('path');
 const Fastify = require('fastify');
 const cors = require('@fastify/cors');
 const { initDb, query, get } = require('./db');
+const { spawn } = require('child_process');
 
 const WINDOWS = { '24h': 24, '7d': 168, '30d': 720 };
-const VALID_CATEGORIES = ['AI', 'Security', 'Trading', 'DevTools', 'Web', 'Data', 'Mobile', 'Gaming', 'Education', 'Others'];
+const VALID_CATEGORIES = ['AI', 'Security', 'Trading', 'DevTools', 'Education', 'Others'];
 
 const app = Fastify({ logger: true });
 
@@ -66,6 +67,25 @@ async function main() {
     app.get('/api/health', async () => ({ ok: true }));
 
     app.get('/api/categories', async () => ({ categories: VALID_CATEGORIES }));
+
+    app.post('/api/fetch', async (req, reply) => {
+        return new Promise((resolve) => {
+            const workerPath = path.join(__dirname, 'worker.js');
+            const child = spawn(process.execPath, [workerPath], {
+                cwd: path.join(__dirname, '..'),
+                env: process.env,
+                stdio: ['ignore', 'pipe', 'pipe'],
+            });
+            let out = '';
+            let err = '';
+            child.stdout.on('data', (d) => { out += d.toString(); });
+            child.stderr.on('data', (d) => { err += d.toString(); });
+            child.on('close', (code) => {
+                if (code === 0) resolve({ ok: true, output: out.trim() });
+                else reply.code(500).send({ ok: false, error: err.trim() || `exit ${code}` });
+            });
+        });
+    });
 
     app.get('/api/trending', async (req) => {
         const windowKey = (req.query.window || '24h').toLowerCase();
