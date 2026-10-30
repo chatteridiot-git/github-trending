@@ -45,12 +45,12 @@ function run(sql, params = []) {
 
 async function upsertRepo(repo) {
     await run(
-        `INSERT INTO repositories (id, name, full_name, description, html_url, created_at)
-         VALUES (?, ?, ?, ?, ?, ?)
+        `INSERT INTO repositories (id, name, full_name, description, html_url, created_at, category)
+         VALUES (?, ?, ?, ?, ?, ?, ?)
          ON CONFLICT(id) DO UPDATE SET
            name=excluded.name, full_name=excluded.full_name, description=excluded.description,
-           html_url=excluded.html_url, created_at=excluded.created_at`,
-        [repo.id, repo.name, repo.full_name, repo.description, repo.html_url, repo.created_at]
+           html_url=excluded.html_url, created_at=excluded.created_at, category=excluded.category`,
+        [repo.id, repo.name, repo.full_name, repo.description, repo.html_url, repo.created_at, repo.category || 'Others']
     );
 }
 

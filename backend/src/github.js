@@ -17,7 +17,7 @@ async function searchRecentRepos(days = 30, perPage = 100) {
     const since = new Date(Date.now() - days * 86400000).toISOString().slice(0, 10);
     const url = `${BASE}/search/repositories?q=created:>${since}&sort=stars&order=desc&per_page=${perPage}`;
     const res = await axios.get(url, { headers: headers(), timeout: 30000 });
-    return res.data.items || [];
+    return (res.data.items || []).map((r) => ({ ...r, topics: r.topics || [] }));
 }
 
 async function getRepo(fullName) {

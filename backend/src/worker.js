@@ -2,6 +2,7 @@ require('dotenv').config({ path: require('path').join(__dirname, '..', '.env') }
 
 const { initDb, upsertRepo, insertSnapshot } = require('./db');
 const gh = require('./github');
+const { classify } = require('./classify');
 
 async function run() {
     await initDb();
@@ -18,6 +19,7 @@ async function run() {
             description: r.description,
             html_url: r.html_url,
             created_at: r.created_at,
+            category: classify(r),
         };
         await upsertRepo(repo);
         await insertSnapshot(repo.id, r.stargazers_count);

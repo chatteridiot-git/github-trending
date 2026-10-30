@@ -4,8 +4,11 @@ CREATE TABLE IF NOT EXISTS repositories (
     full_name TEXT NOT NULL,
     description TEXT,
     html_url TEXT NOT NULL,
-    created_at DATETIME NOT NULL
+    created_at DATETIME NOT NULL,
+    category TEXT NOT NULL DEFAULT 'Others'
 );
+
+CREATE INDEX IF NOT EXISTS idx_repos_category ON repositories(category);
 
 CREATE TABLE IF NOT EXISTS star_snapshots (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
